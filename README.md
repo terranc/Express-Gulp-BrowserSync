@@ -1,5 +1,5 @@
 #Express+Gulp+BrowserSync+nodemon
-Run an Express app base on browserSync proxy,enjoy the live edit(live reload) and save you `F5` key.
+Run an Express app base on browserSync proxy,enjoy the live edit(live reload).
 ##Use
 First,cd to you project and run:
 
@@ -7,9 +7,7 @@ First,cd to you project and run:
 npm install
 ```
 
-And then
-
-Run `gulp` to start
+Then run `gulp` to start
 
   * The Express server will run at localhost: 3000
   * The BrowserSync will run at localhost: 5000
