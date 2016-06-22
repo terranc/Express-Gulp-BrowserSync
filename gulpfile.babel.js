@@ -5,6 +5,7 @@ import prefix from 'gulp-autoprefixer';
 import nodemon from 'gulp-nodemon';
 import sourcemaps from 'gulp-sourcemaps';
 import jade from 'gulp-jade';
+import sprite from 'gulp.spritesmith';
 import del from 'del';
 
 const reload = browserSync.reload;
@@ -20,6 +21,17 @@ gulp.task('sass', ()=> {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/css'))
     .pipe(reload({stream: true}));
+});
+
+gulp.task('sprite',()=>{
+  let spriteOutput;
+  spriteOutput = gulp.src("public/sprite/*")
+    .pipe(sprite({
+      imgName: '../img/sprite.png',
+      cssName: 'sprite.css'
+    }));
+  spriteOutput.css.pipe(gulp.dest("sass/includes"));
+  spriteOutput.img.pipe(gulp.dest("public/img"));
 });
 
 gulp.task('browser-sync', ['nodemon'], () => {
@@ -81,7 +93,7 @@ gulp.task('copy', ()=> {
 gulp.task('dist', ['clean', 'copy', 'jade']);
 
 
-gulp.task('default', ['browser-sync', 'sass'], ()=> {
+gulp.task('default', ['browser-sync','sprite', 'sass'], ()=> {
   gulp.watch(['sass/**/*.*'], ['sass']);
 });
 
